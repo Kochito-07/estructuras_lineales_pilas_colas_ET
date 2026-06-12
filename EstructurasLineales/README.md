@@ -54,7 +54,7 @@ Verifica si una palabra se lee igual en ambas direcciones. Introduce los caracte
 
 * **Consola:** 
 
-![alt text](Captura-2.PNG)
+![alt text](captures/Captura-1.PNG)
 
 ### Ejercicio 02: Ordenar Stack
 * **Código:** 
@@ -73,7 +73,7 @@ Verifica si una palabra se lee igual en ambas direcciones. Introduce los caracte
 
 * **Consola:** 
 
-![alt text](Captura2-1.PNG)
+![alt text](captures/Captura2-1.PNG)
 
 ### Ejercicio 03: Palíndromo usando Colas
 * **Código:** 
@@ -89,7 +89,7 @@ Verifica si una palabra se lee igual en ambas direcciones. Introduce los caracte
   
 * **Consola:** 
 
-![alt text](Captura3.PNG)
+![alt text](captures/Captura3.PNG)
 
 ---
 
