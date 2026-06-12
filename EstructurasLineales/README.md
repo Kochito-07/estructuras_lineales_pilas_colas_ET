@@ -1,39 +1,118 @@
-# Práctica 3: Ejercicios de lógica con estructuras lineales: pilas y colas
+# Práctica 3: Ejercicios de Lógica con Pilas y Colas
 
-**Nombre del estudiante:** [Escribe tu nombre aquí]  
+**Nombre:** Elvis Tipanta  
 **Asignatura:** Estructura de Datos - Segundo Interciclo  
-**Versión del Release:** v2.0.2
 
 ---
 
-## Descripción general del proyecto
+## 📌 Descripción General
 
-[cite_start]Esta aplicación en Java resuelve tres problemas lógicos fundamentales utilizando estructuras de datos lineales (Pilas y Colas)[cite: 12, 13]. [cite_start]El objetivo principal es fortalecer el uso de operaciones propias de `Stack` (LIFO) y `Queue` (FIFO) [cite: 14][cite_start], respetando restricciones estrictas como no convertir los datos a arreglos o listas para su manipulación directa[cite: 37]. 
-
-[cite_start]El proyecto está organizado en paquetes (`app` para la clase principal y `utils` para las clases lógicas) y estructurado para ejecutarse en Visual Studio Code[cite: 22, 23, 24, 25, 26].
+Este proyecto implementa soluciones en Java para resolver problemas lógicos utilizando estructuras de datos lineales (Pilas y Colas). Se aplican estrictamente los principios LIFO y FIFO mediante el uso de `Stack` y `Queue`, respetando la restricción de no utilizar arreglos ni listas para el ordenamiento o validación directa.
 
 ---
 
-## Explicación de los Ejercicios
+## 🛠️ Explicación de los Ejercicios
 
-### Ejercicio 01: Validación de Signos (`SignValidator.java`)
-[cite_start]**Objetivo:** Determinar si un String que contiene los caracteres `()`, `{}`, `[]` es válido[cite: 93].
-**Lógica aplicada:** Se utiliza un `Stack`. Al recorrer la cadena, cada símbolo de apertura se empuja (push) a la pila. Cuando se encuentra un símbolo de cierre, se saca (pop) el elemento del tope de la pila y se verifica que corresponda al mismo tipo. Si la pila termina vacía y no hubo discrepancias, la cadena es válida.
+### Ejercicio 01: Validación de Signos
+Utiliza un `Stack` para asegurar que los caracteres `()`, `{}`, `[]` se abran y cierren en el orden correcto. Los símbolos de apertura se apilan, y al encontrar uno de cierre, se desapila el último elemento para verificar que coincidan.
 
-### Ejercicio 02: Ordenamiento de un Stack (`StackSorter.java`)
-[cite_start]**Objetivo:** Ordenar un `Stack` de enteros para que los elementos más pequeños queden en el tope[cite: 111].
-[cite_start]**Lógica aplicada:** Se resolvió utilizando exclusivamente una pila auxiliar y una variable temporal, respetando la regla de no usar arreglos u otras estructuras[cite: 116, 118]. Mediante bucles `while`, se extraen elementos de la pila original y se comparan con el tope de la auxiliar (`peek`), moviendo los números mayores de regreso temporalmente hasta encontrar la posición correcta del número actual.
+### Ejercicio 02: Ordenar un Stack
+Ordena una pila dejando el elemento menor en el tope. La lógica utiliza exclusivamente un `Stack` auxiliar y una variable temporal, trasladando los elementos mayores a la pila auxiliar temporalmente para encontrar la posición correcta de cada número.
 
-### Ejercicio 03: Palíndromo usando Colas (`QueuePalindrome.java`)
-[cite_start]**Objetivo:** Determinar si una palabra es palíndroma aprovechando el comportamiento de las colas[cite: 132].
-[cite_start]**Lógica aplicada:** Para evitar comparar la cadena original con una versión invertida en un `String`[cite: 136], se combinaron dos estructuras: una `Queue` (FIFO) y un `Stack` (LIFO). Se guardan las letras iterativamente en ambas estructuras y luego se extraen una por una comparándolas simultáneamente. Esto garantiza la verificación letra por letra desde ambos extremos de la palabra.
+### Ejercicio 03: Palíndromo usando Colas
+Verifica si una palabra se lee igual en ambas direcciones. Introduce los caracteres de la palabra simultáneamente en un `Stack` (comportamiento LIFO) y en un `Queue` (comportamiento FIFO), para luego extraerlos y compararlos uno a uno sin usar métodos de inversión de Strings.
 
 ---
 
-## Evidencias de Ejecución
+## 💻 Evidencias de Ejecución
 
-### Ejercicio 01
-![alt text](Captura.PNG)
-### Ejercicio 02
+### Ejercicio 01: Validación de signos
+* **Código:** 
 
-### Ejercicio 03
+        for (int i = 0; i < s.length(); i++) {
+            char actual = s.charAt(i);
+            if (actual == '(' || actual == '[' || actual == '{') {
+                pila.push(actual);
+            }
+            else if (actual == ')' || actual == ']' || actual == '}') {
+                if (pila.isEmpty()) {
+                    return false;
+                }
+                char tope = pila.pop();
+                if (actual == ')' && tope != '(') {
+                    return false;
+                }
+                if (actual == ']' && tope != '[') {
+                    return false;
+                }
+                if (actual == '}' && tope != '{') {
+                    return false;
+                }
+            }   
+        }
+        return pila.isEmpty();
+
+* **Consola:** 
+
+![alt text](Captura-2.PNG)
+
+### Ejercicio 02: Ordenar Stack
+* **Código:** 
+
+
+        while (!stack.isEmpty()) {
+            int temp = stack.pop();
+            while (!pila.isEmpty() && pila.peek() > temp) {
+                stack.push(pila.pop());
+            }
+            pila.push(temp);
+        }
+        while (!pila.isEmpty()) {
+            stack.push(pila.pop());
+        }
+
+* **Consola:** 
+
+![alt text](Captura2-1.PNG)
+
+### Ejercicio 03: Palíndromo usando Colas
+* **Código:** 
+
+        while (!cola.isEmpty()) {
+            char letraCola = cola.remove();
+            char letraPila = pila.pop();
+            if (letraCola != letraPila) {
+                return false;
+            }
+        }
+        return true;
+  
+* **Consola:** 
+
+![alt text](Captura3.PNG)
+
+---
+
+## 🧠 Conclusiones
+
+1. Sobre el principio LIFO (Pilas): El uso de la estructura Stack y su principio LIFO (Último en entrar, Primero en salir) resulta ideal para resolver problemas que requieren "recordar" el último estado de una secuencia. Esto quedó demostrado en el Ejercicio 01, donde la pila permitió emparejar y validar correctamente los signos de apertura y cierre en el orden exacto en que debían resolverse.
+
+2. Sobre la combinación de estructuras (Pilas y Colas): Combinar una Cola (Queue) con una Pila (Stack) es una estrategia altamente eficiente para analizar datos desde extremos opuestos simultáneamente. Mientras la cola respeta y mantiene el orden original de entrada (FIFO), la pila lo invierte de forma natural, lo que facilitó la validación del palíndromo en el Ejercicio 03 sin necesidad de usar métodos externos o transformar cadenas de texto.
+
+3. Sobre las restricciones y la lógica algorítmica: Restringir el uso de arreglos o listas para manipular datos obliga a desarrollar un pensamiento algorítmico mucho más profundo. En el Ejercicio 02, quedó en evidencia que utilizando únicamente una pila auxiliar y las operaciones nativas básicas (push, pop, peek, isEmpty), es completamente posible ordenar conjuntos de datos gestionando adecuadamente el almacenamiento temporal.
+
+---
+
+## 🔗 Enlace al Repositorio
+
+* **URL** 
+https://github.com/Kochito-07/estructuras_lineales_pilas_colas_ET.git
+
+---
+
+## 🚀 Entorno de Desarrollo (VS Code)
+
+El proyecto está estructurado de la siguiente manera:
+* `src`: Carpeta principal del código.
+* `app`: Carpeta main para la ejecución.
+* `utils`: Codigos implementados para la ejecución.
