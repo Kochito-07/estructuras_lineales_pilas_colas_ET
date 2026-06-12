@@ -34,7 +34,7 @@ public static void main(String[] args) {
         
         StackSorter sorter = new StackSorter();
         
-        System.out.println("\nEjercicio 02: Ordenar Stack");
+        System.out.println("\n--- EJERCICIO 2 ORDENAR STACK ---\n");
         System.out.println("Stack original: " + stack);
         
         sorter.sortStack(stack);
@@ -46,7 +46,7 @@ public static void main(String[] args) {
     private static void runQueuePalindrome() {
         QueuePalindrome queuePalindrome = new QueuePalindrome();
         
-        System.out.println("\nEjercicio 03: Palindromo usando Colas");
+        System.out.println("\n--- EJERCICIO 3 PALÍNDROMO USANDO COLAS");
         System.out.println("ana | Resultado: " + queuePalindrome.isPalindrome("ana"));
         System.out.println("radar | Resultado: " + queuePalindrome.isPalindrome("radar"));
         System.out.println("java | Resultado: " + queuePalindrome.isPalindrome("java"));
